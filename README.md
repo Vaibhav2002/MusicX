@@ -36,7 +36,7 @@
 
 It uses Firebase as its backend and also used AudD api to get lyrics of songs. 
 
-- Fully functionable. 
+- Fully functional.
 - Clean and Simple Material 3 UI built using Jetpack Compose.
 - It supports dark theme too 🌗.
 
