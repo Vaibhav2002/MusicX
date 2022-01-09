@@ -9,7 +9,7 @@
 
 ***You can Install and test latest Healthify app from below 👇***
 
-[![MusicX](https://img.shields.io/badge/MusicX✅-APK-red.svg?style=for-the-badge&logo=android)](https://github.com/Vaibhav2002/Healthify/releases/tag/v1.0.0)
+[![MusicX](https://img.shields.io/badge/MusicX✅-APK-red.svg?style=for-the-badge&logo=android)](https://github.com/Vaibhav2002/MusicX/releases/tag/v1.0.0)
 
 ## Setup
 - Clone the repository on your machine.
@@ -63,18 +63,20 @@ It uses Firebase as its backend and also used AudD api to get lyrics of songs.
 
 ### Technical details 
 
-- Healthify uses Auth0 for user authentication, it supports email based authentication and Google authentication
-- Healthify uses Firebase Firestore as it's primary database.
-- Healthify has full offline support, it uses Android's ROOM database for caching all data offline.
-- Healthify is made using Kotlin and following Modern Android Development practices.
-- Healthify uses all Jetpack libraries and follows MVVM architecture. It also has a G.O.A.T rating in Android's  M.A.D scorecard.
-- Healthify's code follows all the best practices and software development principles which make it a very good learning resource for beginners.
+- MusicX uses Firebase to fetch all songs.
+- MusicX uses AudD api to get lyrics of songs.
+- MusicX is built fllowing Material 3 Guidelines.
+- MusicX is built using [Jetpack Compose](https://developer.android.com/jetpack/compose?gclid=CjwKCAiArOqOBhBmEiwAsgeLmUlv4dbl6KV3yBs7SXOpYReSF8DaG5yWJipHnkO-OEWgyMHgjn1BixoC8bUQAvD_BwE&gclsrc=aw.ds).
+- MusicX is made using Kotlin and following Modern Android Development practices.
+- MusicX uses all Jetpack libraries and follows MVVM architecture. It also has a G.O.A.T rating in Android's  M.A.D scorecard.
+- MusicX's code follows all the best practices and software development principles which make it a very good learning resource for beginners.
 
-![summary.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1629894600750/lYuPA7nYY.png)
+![summary.png](media/summary.png)
 
 ## Built With 🛠
 - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
 - [Jetpack Compose](https://developer.android.com/jetpack/compose?gclid=CjwKCAiArOqOBhBmEiwAsgeLmUlv4dbl6KV3yBs7SXOpYReSF8DaG5yWJipHnkO-OEWgyMHgjn1BixoC8bUQAvD_BwE&gclsrc=aw.ds) - Jetpack Compose is Android’s modern toolkit for building native UI.
+- [Material 3](https://m3.material.io) - Material Design 3, Google’s most expressive and adaptable design system
 - [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - For asynchronous and more..
 - [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/) - A cold asynchronous data stream that sequentially emits values and completes normally or with an exception.
  - [StateFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow) - StateFlow is a state-holder observable flow that emits the current and new state updates to its collectors.
@@ -82,6 +84,7 @@ It uses Firebase as its backend and also used AudD api to get lyrics of songs.
 - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture) - Collection of libraries that help you design robust, testable, and maintainable apps.
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Stores UI-related data that isn't destroyed on UI changes. 
   - [Room](https://developer.android.com/training/data-storage/room) - Room is an android library which is an ORM which wraps android's native SQLite database
+- [Exoplayer](https://exoplayer.dev) - Exoplayer library is used to play media in Android.
 - [Dependency Injection](https://developer.android.com/training/dependency-injection) - 
   - [Hilt-Dagger](https://dagger.dev/hilt/) - Standard library to incorporate Dagger dependency injection into an Android application.
   - [Hilt-ViewModel](https://developer.android.com/training/dependency-injection/hilt-jetpack) - DI for injecting `ViewModel`.
@@ -89,6 +92,8 @@ It uses Firebase as its backend and also used AudD api to get lyrics of songs.
   - [Firebase](https://firebase.google.com)
     - Firebase Firestore - A NoSQL database to store all data
     - Firebase Storage - A Cloud storage.
+- [AudD Api](https://audd.io) - Api to fetch lyrics of songs
+- [Retrofit](https://github.com/square/retrofit) - An Http Client for android.
 - [Timber](https://github.com/JakeWharton/timber) - A simple logging library for android.
 - [GSON Converter](https://github.com/square/retrofit/tree/master/retrofit-converters/gson) - A Converter which uses Moshi for serialization to and from JSON.
 - [Coil](https://github.com/coil-kt/coil) - An image loading library for Android backed by Kotlin Coroutines.
@@ -96,27 +101,27 @@ It uses Firebase as its backend and also used AudD api to get lyrics of songs.
 
 # Package Structure
     
-    com.vaibhav.healthify    # Root Package
+    dev.vaibhav.musicX    # Root Package
     .
-    ├── data                # For data handling.
-    |   ├── local           # Room DB and its related classes
-    |   ├── remote          # Firebase, Auth0 and their relative classes
-    │   ├── model           # Model data classes and mapper classes, both remote and local entities
-    │   └── repo            # Single source of data.
+    ├── data                    # For data handling.
+    |   ├── local               # Room DB and its related classes
+    |   ├── remote              # Firebase, Auth0 and their relative classes
+    │   ├── model               # Model data classes and mapper classes, both remote and local entities
+    │   └── repo                # Single source of data.
     |
-    ├── di                  # Dependency Injection             
-    │   └── module          # DI Modules
+    ├── di                      # Dependency Injection             
+    │   └── module              # DI Modules
     |
-    ├── ui                  # UI/View layer
-    |   ├── adapters        # All Adapters, viewholder and diffUtils for recyclerViews   
-    |   ├── dialog          # All Dialog Fragments and their viewmodels      
-    │   ├── auth            # Authorization Activity and its fragments
-    │   ├── homeScreen      # Home Activity and its fragments
-    |   ├── userDetails     # User Details Activity and its fragments
-    |   ├── onBoarding      # OnboardingScreen
-    │   └── splashScreen    # SplashScreen
+    ├──exoplayer                # Exoplayer related files etc.
     |
-    └── utils               # Utility Classes / Kotlin extensions
+    ├── ui                      # UI/View layer
+    |   ├── components          # Common Composaled required.
+    |   ├── screens             # All Screens in app.    
+    │   ├── theme               # App theme related files.
+    │   ├── usecases            # Use-cases for features.
+    |   ├── utils               # Utility classes for UI.
+    |
+    └── utils                   # Utility Classes / Kotlin extensions
 
 
 ## Architecture
