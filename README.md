@@ -14,94 +14,51 @@
 ## Setup
 - Clone the repository on your machine.
 - Create project in Firebase, enable firestore, set rules to public and download google-services.json and paste in the app folder.
-- Sign up for auth0 and do as stated below
-q
-Open strings.xml and add Auth0 credentials 
-
-```xml
-
-<!--    add your Auth0 scheme here-->
-<string name="scheme"></string>
-
-<!--    add your Auth0 domain name here-->
-<string name="domain"></string>
-
-<!--    add your Auth0 client id here-->
-<string name="client"></string>
-
-```
-
-Open Secrets.kt in util package and add your Auth0 credentials
-
+- Add all your songs in Firestore.
+- Add your AudD api key and base url in Secrets.kt
+  ```kotlin
+    const val API_KEY = ""  //add your AudD api key here
+    const val BASE_URL = "" //add your AudD base url here
+  ```
+- I have create a sample music list which i uploaded on Firebase, you can use it , all you need to do is to download the mp3 and upload it on any cloud storage and add the url in the objects in MusicList.kt
 ```kotlin
-
-const val CLIENT_ID = ""            // add you Auth0 client id here
-const val DOMAIN_NAME = ""          // add you Auth0 domain name here
-
+    Music(
+            id = UUID.randomUUID().toString(),
+            title = "Rap God",
+            artists = listOf("Eminem"),
+            imageUrl = "https://i.scdn.co/image/ab67616d00004851643e6ecebab400d52574e4b2",
+            musicUrl = "", // add the url here
+            duration = 363000L
+        ),
 ```
 
 ## About
 
-It uses Firebase and Auth0 as its backend. It uses Auth0 for email based auth and Google auth and Firebase Firestore as its database.
+It uses Firebase as its backend and also used AudD api to get lyrics of songs. 
 
 - Fully functionable. 
-- Clean and Simple Material UI.
+- Clean and Simple Material 3 UI built using Jetpack Compose.
 - It supports dark theme too 🌗.
 
 ### App Features
 
-- **User Authentication** - Allowing users to login and register using auth0.
-- **Dashboard** - There are two dashboards for sleep and water. It shows the amount of water drank and hours slept and also logs for each.
-- **Add Water** - Selecting water amount to add in daily water list.
-- **Water Drinking Notification** - Healthify reminds you to drink water by sending a notification after 1 hour of your last tracked water intake.
-- **Add Sleep** - Selecting number of hours to add in daily sleep list
-- **Statistics** - Shows statistics of water drank and hours slept within last week. 
-- **Profile** - Shows user's profile.
-- **Leaderboard** - Shows a leaderboard consisting of all users ranked based on XP points.
-- **About** - Shows information about the app like its version number and more.
+- **Home Screen** - Shows a list of all songs available.
+- **Music Player Screen** - Music Player screen with music controls.
+- **Playlist Screen** - Screen showing the current playlist/play queue.
 
 ### Insights into the app 🔎
 
-![](media/light_dark.png)
-
-**Healthify** offers light as well as dark theme 🌓. So now you can use Healthify in whatever theme you like the most. 🔥
+![](media/design-light.png)
 
 
-![](media/slide-1.png)
-
-
-**Healthify** has a clean and sleek user interface which makes it easy for people of all age groups use it. 😁
-
-
-![](media/slide-2.png)
-
-
-**Healthify** uses Auth0 for authentication. It supports email-based authentication as well as Google authentication. **Healthify** also has a smooth user onboarding process.
-
-
-![](media/slide-3.png)
-
-
-Have a look at your daily water intake and statistics of your water intake in the last week.
-
-
-![](media/slide-4.png)
-
-Have a look at your daily sleep 😴 amount and statistics of your sleep in the last week.
-
-
-![](media/slide-5.png)
-
-**Healthify** has a XP based ranking system which ranks you among other users. XP can be gained by adding water and sleep. Having such ranking system in this app will make users compete and hence make it a habit of users to drink water and get enough sleep
+![](media/design-dark.png)
 
 ## 📸 Screenshots
 
 |||||
 |:----------------------------------------:|:-----------------------------------------:|:-----------------------------------------: |:-----------------------------------------: |
-| ![](media/onboarding1.jpg) | ![](media/onboarding2.jpg) | ![](media/onboarding3.jpg) | ![](media/onboarding4.jpg) |
-| ![](media/getting-started.jpg)  | ![](media/username.jpg) | ![](media/weight.jpg)    | ![](media/age.jpg) |
-| ![](media/water-dashboard.jpg) | ![](media/sleep-dashboard.jpg)    | ![](media/water-stats.jpg)      | ![](media/sleep-stats.jpg) |
-| ![](media/profile.jpg)  |    ![](media/leaderboard.jpg)    | ![](media/about.jpg)        | ![](media/splash.jpg) |
+| ![](media/home-light.jpg) | ![](media/player-light.jpg) | ![](media/playlist-light.jpg) | ![](media/lyrics-light.jpg) |
+| ![](media/home-dark.jpg) | ![](media/player-dark.jpg) | ![](media/playlist-dark.jpg) | ![](media/lyrics-dark.jpg) |
 
 
 ### Technical details 
@@ -117,24 +74,21 @@ Have a look at your daily sleep 😴 amount and statistics of your sleep in the 
 
 ## Built With 🛠
 - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
+- [Jetpack Compose](https://developer.android.com/jetpack/compose?gclid=CjwKCAiArOqOBhBmEiwAsgeLmUlv4dbl6KV3yBs7SXOpYReSF8DaG5yWJipHnkO-OEWgyMHgjn1BixoC8bUQAvD_BwE&gclsrc=aw.ds) - Jetpack Compose is Android’s modern toolkit for building native UI.
 - [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - For asynchronous and more..
 - [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/) - A cold asynchronous data stream that sequentially emits values and completes normally or with an exception.
  - [StateFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow) - StateFlow is a state-holder observable flow that emits the current and new state updates to its collectors.
  - [SharedFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow) - A SharedFlow is a highly-configurable generalization of StateFlow.
 - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture) - Collection of libraries that help you design robust, testable, and maintainable apps.
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Stores UI-related data that isn't destroyed on UI changes. 
-  - [ViewBinding](https://developer.android.com/topic/libraries/view-binding) - Generates a binding class for each XML layout file present in that module and allows you to more easily write code that interacts with views.
-  - [DataBinding](https://developer.android.com/topic/libraries/data-binding) - Binds data directly into XML layouts
   - [Room](https://developer.android.com/training/data-storage/room) - Room is an android library which is an ORM which wraps android's native SQLite database
-  - [DataStore](https://developer.android.com/topic/libraries/architecture/datastore) - Jetpack DataStore is a data storage solution that allows you to store key-value pairs or typed objects with protocol buffers.
 - [Dependency Injection](https://developer.android.com/training/dependency-injection) - 
   - [Hilt-Dagger](https://dagger.dev/hilt/) - Standard library to incorporate Dagger dependency injection into an Android application.
   - [Hilt-ViewModel](https://developer.android.com/training/dependency-injection/hilt-jetpack) - DI for injecting `ViewModel`.
 - Backend
   - [Firebase](https://firebase.google.com)
     - Firebase Firestore - A NoSQL database to store all data
-  - [Auth0](https://auth0.com) -  Auth0 is an easy to implement, adaptable authentication and authorization platform.
-- [GSON](https://github.com/google/gson) - A modern JSON library for Kotlin and Java.
+    - Firebase Storage - A Cloud storage.
 - [Timber](https://github.com/JakeWharton/timber) - A simple logging library for android.
 - [GSON Converter](https://github.com/square/retrofit/tree/master/retrofit-converters/gson) - A Converter which uses Moshi for serialization to and from JSON.
 - [Coil](https://github.com/coil-kt/coil) - An image loading library for Android backed by Kotlin Coroutines.
