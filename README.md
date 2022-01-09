@@ -7,7 +7,7 @@
 
 # Application Install
 
-***You can Install and test latest Healthify app from below 👇***
+***You can Install and test latest MusicX app from below 👇***
 
 [![MusicX](https://img.shields.io/badge/MusicX✅-APK-red.svg?style=for-the-badge&logo=android)](https://github.com/Vaibhav2002/MusicX/releases/tag/v1.0.0)
 
