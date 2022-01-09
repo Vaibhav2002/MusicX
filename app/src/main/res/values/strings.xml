@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MusicX</string>
+    <string name="search_here">Search here</string>
+
+    <string name="home_header">Find the best music \nfor your banger</string>
+    <string name="playlist">Playlist</string>
+
+    <string name="notification_channel_name">MusicX Channel</string>
+    <string name="notification_channel_description">Shows the currently playing music</string>
+</resources>
