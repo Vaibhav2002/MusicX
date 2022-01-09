@@ -1,5 +1,4 @@
-![](meida/cover-light.png)
----
+![](media/cover-light.png)
 ![](media/cover-dark.png)
 
 # **MusicX** 
