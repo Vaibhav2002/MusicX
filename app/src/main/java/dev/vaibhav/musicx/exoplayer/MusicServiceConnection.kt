@@ -53,6 +53,8 @@ class MusicServiceConnection @Inject constructor(@ApplicationContext private val
         mediaBrowser.unsubscribe(parentId)
     }
 
+    fun stopPlaying() = transportControls.stop()
+
     fun seekTo(pos: Long) = transportControls.seekTo(pos)
 
     fun pause() = transportControls.pause()

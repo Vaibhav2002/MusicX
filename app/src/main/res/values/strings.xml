@@ -7,4 +7,5 @@
 
     <string name="notification_channel_name">MusicX Channel</string>
     <string name="notification_channel_description">Shows the currently playing music</string>
+    <string name="add_music_cd">Add music</string>
 </resources>

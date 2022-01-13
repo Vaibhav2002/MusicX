@@ -38,10 +38,6 @@ class HomeViewModel @Inject constructor(
         musicRepo.getAllSongsFlow(it)
     }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
-//    private val musicList = searchQuery.flatMapLatest { query ->
-//        musicRepo.getAllSongsFlow().map { items -> items.filter { it.title.contains(query) } }
-//    }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
-
     private val currentSong = musicUseCase.currentSong
     private val playBackState = musicUseCase.playbackState
 
@@ -95,5 +91,9 @@ class HomeViewModel @Inject constructor(
     fun onSearchQueryChanged(query: String) = viewModelScope.launch(dispatcher.main) {
         _uiState.value = uiState.value.copy(searchBarText = query)
         searchQuery.emit(query)
+    }
+
+    fun onBottomBarDismissed() = viewModelScope.launch {
+        musicUseCase.stopPlaying()
     }
 }

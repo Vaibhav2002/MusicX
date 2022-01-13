@@ -1,5 +1,6 @@
 package dev.vaibhav.musicx.ui.screens
 
+import android.annotation.SuppressLint
 import android.support.v4.media.MediaBrowserCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,15 +13,17 @@ import dev.vaibhav.musicx.utils.getMusic
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@SuppressLint("StaticFieldLeak")
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val musicUseCase: MusicUseCase,
     private val musicRepo: MusicRepo,
-    private val dispatcher: Dispatcher
+    private val dispatcher: Dispatcher,
 ) : ViewModel() {
 
     init {
         subscribeToMusic()
+        downloadMusic()
     }
 
     private fun subscribeToMusic() = viewModelScope.launch {
@@ -38,5 +41,8 @@ class MainViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         musicUseCase.unsubscribeToService()
+    }
+
+    private fun downloadMusic() {
     }
 }

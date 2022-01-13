@@ -63,6 +63,8 @@ class MusicUseCase @Inject constructor(private val musicConnection: MusicService
 
     fun rewind() = musicConnection.rewind()
 
+    fun stopPlaying() = musicConnection.stopPlaying()
+
     fun playFromMediaId(mediaId: String) = musicConnection.playFromMediaId(mediaId)
 
     fun isMusicPlayingOrPaused() = musicConnection.playbackState.value?.let {

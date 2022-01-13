@@ -27,6 +27,14 @@ object AppModule {
     @Provides
     fun providesFirestore(): FirebaseFirestore = Firebase.firestore
 
+    @Provides
+    fun providesContext(@ApplicationContext context: Context): Context = context
+
+//    @Provides
+//    fun providesYoutubeDl(context: Context): YoutubeDL = YoutubeDL.getInstance().also {
+//        it.init(context)
+//    }
+
     @Singleton
     @Provides
     fun providesMusicDb(

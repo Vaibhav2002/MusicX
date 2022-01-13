@@ -35,9 +35,17 @@ class MainActivity : ComponentActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
 
+//    @Inject
+//    lateinit var youtubeDL: YoutubeDL
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
+//        val request = YoutubeDLRequest("https://youtu.be/ApXoWvfEYVU").apply {
+//            addOption("-f", "best")
+//        }
+//        val info = youtubeDL.getInfo(request)
+//        Timber.d(info.url)
         setContent {
             ProvideWindowInsets {
                 MusicXTheme {
