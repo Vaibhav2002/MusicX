@@ -9,7 +9,7 @@
 
 ***You can Install and test latest MusicX app from below 👇***
 
-[![MusicX](https://img.shields.io/badge/MusicX✅-APK-red.svg?style=for-the-badge&logo=android)](https://github.com/Vaibhav2002/MusicX/releases/tag/v1.0.0)
+[![MusicX](https://img.shields.io/badge/MusicX✅-APK-red.svg?style=for-the-badge&logo=android)](https://github.com/Vaibhav2002/MusicX/releases/tag/v1.0.1)
 
 ## Setup
 - Clone the repository on your machine.
@@ -105,7 +105,7 @@ It uses Firebase as its backend and also used AudD api to get lyrics of songs.
     .
     ├── data                    # For data handling.
     |   ├── local               # Room DB and its related classes
-    |   ├── remote              # Firebase, Auth0 and their relative classes
+    |   ├── remote              # Firebase, AudD and their relative classes
     │   ├── model               # Model data classes and mapper classes, both remote and local entities
     │   └── repo                # Single source of data.
     |
