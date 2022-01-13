@@ -9,7 +9,7 @@
 
 ***You can Install and test latest MusicX app from below 👇***
 
-[![MusicX](https://img.shields.io/badge/MusicX✅-APK-red.svg?style=for-the-badge&logo=android)](https://github.com/Vaibhav2002/MusicX/releases/tag/v1.0.1)
+[![MusicX](https://img.shields.io/badge/MusicX✅-APK-red.svg?style=for-the-badge&logo=android)](https://github.com/Vaibhav2002/MusicX/releases/tag/v1.0.2)
 
 ## Setup
 - Clone the repository on your machine.
