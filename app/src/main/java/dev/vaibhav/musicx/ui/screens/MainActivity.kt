@@ -23,7 +23,9 @@ import dev.vaibhav.musicx.ui.screens.homeScreen.HomeScreen
 import dev.vaibhav.musicx.ui.screens.musicPlayer.MusicPlayerScreen
 import dev.vaibhav.musicx.ui.screens.playlistScreen.PlaylistScreen
 import dev.vaibhav.musicx.ui.theme.MusicXTheme
+import dev.vaibhav.musicx.utils.Dispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import javax.inject.Inject
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
@@ -35,17 +37,15 @@ class MainActivity : ComponentActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
 
-//    @Inject
-//    lateinit var youtubeDL: YoutubeDL
+    @Inject
+    lateinit var dispatcher: Dispatcher
+
+//    lateinit var
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-//        val request = YoutubeDLRequest("https://youtu.be/ApXoWvfEYVU").apply {
-//            addOption("-f", "best")
-//        }
-//        val info = youtubeDL.getInfo(request)
-//        Timber.d(info.url)
+//        val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions)
         setContent {
             ProvideWindowInsets {
                 MusicXTheme {
@@ -53,6 +53,9 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    private fun askForStoragePermission() {
     }
 }
 

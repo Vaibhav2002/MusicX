@@ -8,6 +8,7 @@ import android.support.v4.media.session.PlaybackStateCompat
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import dev.vaibhav.musicx.exoplayer.datasource.MusicPlayerDataSource
+import timber.log.Timber
 
 class MusicPlaybackPreparer(
     private val dataSource: MusicPlayerDataSource,
@@ -30,6 +31,7 @@ class MusicPlaybackPreparer(
         dataSource.whenReady {
             val songToBePlayed =
                 dataSource.allMusicAsMetadata.find { it.description.mediaId == mediaId }
+            Timber.d("Prepare from media id $songToBePlayed")
             songToBePlayed?.let { onPlayerPrepared(it) }
         }
     }

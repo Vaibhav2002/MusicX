@@ -5,16 +5,14 @@ import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.upstream.DefaultDataSource
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ServiceComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ServiceScoped
-import dev.vaibhav.musicx.data.local.room.MusicDao
-import dev.vaibhav.musicx.data.models.mapper.MusicMapper
-import dev.vaibhav.musicx.data.remote.dataSource.music.MusicDataSource
-import dev.vaibhav.musicx.exoplayer.datasource.FirebaseMusicPlayerDataSource
+import dev.vaibhav.musicx.exoplayer.datasource.LocalMusicPlayerDataSource
 import dev.vaibhav.musicx.exoplayer.datasource.MusicPlayerDataSource
 
 @Module
@@ -46,13 +44,13 @@ object ServiceModule {
         @ApplicationContext context: Context
     ): DefaultDataSource.Factory = DefaultDataSource.Factory(context)
 
-    @ServiceScoped
-    @Provides
-    fun providesMusicPlayerDataSource(
-        dataSource: MusicDataSource,
-        musicMapper: MusicMapper,
-        musicDao: MusicDao
-    ): MusicPlayerDataSource = FirebaseMusicPlayerDataSource(dataSource, musicMapper, musicDao)
+//    @ServiceScoped
+//    @Provides
+//    fun providesMusicPlayerDataSource(
+//        dataSource: MusicDataSource,
+//        musicMapper: MusicMapper,
+//        musicDao: MusicDao
+//    ): MusicPlayerDataSource = FirebaseMusicPlayerDataSource(dataSource, musicMapper, musicDao)
 
 //    @ServiceScoped
 //    @Provides
@@ -65,4 +63,15 @@ object ServiceModule {
 //    @ServiceScoped
 //    @Provides
 //    fun providesMusicDao(database: MusicXDatabase): MusicDao = database.getMusicDao()
+}
+
+@Module
+@InstallIn(ServiceComponent::class)
+abstract class ServiceInterfaces {
+
+    @ServiceScoped
+    @Binds
+    abstract fun bindsMusicDataSource(
+        localMusicPlayerDataSource: LocalMusicPlayerDataSource
+    ): MusicPlayerDataSource
 }

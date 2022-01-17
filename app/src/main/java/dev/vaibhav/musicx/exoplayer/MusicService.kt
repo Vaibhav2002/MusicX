@@ -22,6 +22,7 @@ import dev.vaibhav.musicx.utils.MEDIA_ROOT_ID
 import dev.vaibhav.musicx.utils.NETWORK_ERROR
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
+import timber.log.Timber
 import javax.inject.Inject
 
 private const val MEDIA_SESSION = "MusicXMediaSession"
@@ -87,6 +88,7 @@ class MusicService : MediaBrowserServiceCompat() {
         playBackPreparer = MusicPlaybackPreparer(musicDataSource) {
             coroutineScope.launch {
                 currentSong.emit(it)
+                Timber.d("Music ${musicDataSource.allMusicAsMetadata}")
                 prepareMusic(it, musicDataSource.allMusicAsMetadata, true)
             }
         }
@@ -102,8 +104,7 @@ class MusicService : MediaBrowserServiceCompat() {
             else allSongs.indexOfFirst { it.description.mediaId == songToBePlayed.description.mediaId }
 //        exoPlayer.setMediaSource(musicDataSource.asMediaSource(dataSourceFactory))
         exoPlayer.prepare(musicDataSource.asMediaSource(dataSourceFactory))
-        if (songIndex != -1)
-            exoPlayer.seekTo(songIndex, 0L)
+        if (songIndex != -1) exoPlayer.seekTo(songIndex, 0L)
         exoPlayer.playWhenReady = playNow
     }
 
@@ -125,6 +126,7 @@ class MusicService : MediaBrowserServiceCompat() {
                     if (isReady) {
                         result.sendResult(musicDataSource.allMusicAsMediaItem.toMutableList())
                         if (!isPlayerInitialized && musicDataSource.allMusic.isNotEmpty()) {
+                            Timber.d("Music ${musicDataSource.allMusicAsMetadata}")
                             musicDataSource.allMusicAsMetadata.also {
                                 prepareMusic(it[0], it, false)
                             }

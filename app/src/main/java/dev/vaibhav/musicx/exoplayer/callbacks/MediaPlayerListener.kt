@@ -15,7 +15,7 @@ class MediaPlayerListener constructor(private val musicService: MusicService) : 
 
     override fun onPlayerError(error: PlaybackException) {
         super.onPlayerError(error)
-        Timber.d(error.message)
+        Timber.d("Player error ${error.message}")
         musicService.showToast(error.message.toString())
     }
 }
