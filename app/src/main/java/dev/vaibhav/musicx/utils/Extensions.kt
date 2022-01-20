@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
+import android.provider.MediaStore.Images.ImageColumns.DATA
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.MediaMetadataCompat.METADATA_KEY_DURATION
@@ -19,8 +20,7 @@ import com.bumptech.glide.request.transition.Transition
 import dev.vaibhav.musicx.data.models.local.Music
 import dev.vaibhav.musicx.exoplayer.isPlaying
 import dev.vaibhav.musicx.exoplayer.isPrepared
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import timber.log.Timber
 
 infix fun <T, F> Resource<T>.mapTo(change: (T) -> F): Resource<F> = when (this) {
     is Resource.Error -> Resource.Error(errorType, message)
@@ -49,7 +49,7 @@ fun MediaMetadataCompat.getMusic(): Music = Music(
     duration = getLong(METADATA_KEY_DURATION),
     artists = description.subtitle.toString().split(","),
     imageUrl = description.iconUri.toString(),
-    musicUrl = description.mediaUri.toString()
+    musicUrl = description.mediaUri ?: Uri.EMPTY
 )
 
 fun MediaBrowserCompat.MediaItem.getMusic(): Music = Music(
@@ -58,7 +58,7 @@ fun MediaBrowserCompat.MediaItem.getMusic(): Music = Music(
     duration = description.extras?.getLong(DURATION) ?: 0,
     artists = description.subtitle.toString().split(","),
     imageUrl = description.iconUri.toString(),
-    musicUrl = description.mediaUri.toString()
+    musicUrl = description.mediaUri ?: Uri.EMPTY
 )
 
 fun Context.loadImageBitmap(url: String, onImageLoaded: (Bitmap) -> Unit) {
@@ -81,7 +81,7 @@ fun PlaybackStateCompat.getMusicState(): MusicState = when {
     else -> MusicState.NONE
 }
 
-fun Context.getLocalMusicList(dispatcher: Dispatcher): Flow<List<Music>> = flow {
+suspend fun Context.getLocalMusicList(dispatcher: Dispatcher): List<Music> {
     val collection = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
         MediaStore.Audio.Media.getContentUri(MediaStore.VOLUME_EXTERNAL)
     else MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
@@ -102,11 +102,11 @@ fun Context.getLocalMusicList(dispatcher: Dispatcher): Flow<List<Music>> = flow 
         null,
         sortOrder
     )
-    val musicList = cursor?.getMusic() ?: emptyList()
-    emit(musicList)
+    val musicList = cursor?.getMusic(this) ?: emptyList()
+    return musicList
 }
 
-private suspend fun Cursor.getMusic(): List<Music> {
+private suspend fun Cursor.getMusic(context: Context): List<Music> {
     val musicList = mutableListOf<Music>()
     val idColumn = getColumnIndexOrThrow(MediaStore.Audio.Media._ID)
     val albumIdColumn = getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID)
@@ -120,10 +120,24 @@ private suspend fun Cursor.getMusic(): List<Music> {
         val albumId = getLong(albumIdColumn)
         val artists = getString(artistsColumn).split(" ")
         val musicUri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id)
+        Timber.d("File path = $musicUri")
         val imageUrl = getAlbumArt(albumId).toString()
-        musicList += Music(id.toString(), title, duration, artists, imageUrl, musicUri.toString())
+        musicList += Music(id.toString(), title, duration, artists, imageUrl, musicUri)
     }
     return musicList
+}
+
+private fun Context.getFilePathFromUri(uri: Uri): String {
+    Timber.d("URI $uri")
+    return if ("content" == uri.scheme) {
+        val cursor = contentResolver.query(uri, arrayOf(DATA), null, null, null)
+        cursor?.moveToFirst()
+        val filePath = cursor?.getString(0) ?: ""
+        cursor?.close()
+        filePath
+    } else {
+        uri.path ?: ""
+    }
 }
 
 private suspend fun getAlbumArt(album_id: Long) =

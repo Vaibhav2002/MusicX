@@ -1,6 +1,7 @@
 package dev.vaibhav.musicx.ui.screens.homeScreen
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import android.net.Uri
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -133,7 +134,7 @@ fun AddMusicFabPrevDark() {
 fun MusicBottomBarPreviewLight() {
     MusicXTheme {
         MusicBottomBar(
-            music = Music("", "Divide", 122131, listOf("Ed Sheeran"), "", ""),
+            music = Music("", "Divide", 122131, listOf("Ed Sheeran"), "", Uri.EMPTY),
             isPlaying = true,
             modifier = Modifier
                 .fillMaxWidth()
@@ -149,7 +150,7 @@ fun MusicBottomBarPreviewLight() {
 fun MusicBottomBarPreviewDark() {
     MusicXTheme {
         MusicBottomBar(
-            music = Music("", "Divide", 122131, listOf("Ed Sheeran"), "", ""),
+            music = Music("", "Divide", 122131, listOf("Ed Sheeran"), "", Uri.EMPTY),
             isPlaying = true,
             modifier = Modifier
                 .fillMaxWidth()

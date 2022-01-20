@@ -1,5 +1,6 @@
 package dev.vaibhav.musicx.data.models.local
 
+import android.net.Uri
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -11,5 +12,5 @@ data class Music(
     val duration: Long,
     val artists: List<String>,
     val imageUrl: String,
-    val musicUrl: String
+    val musicUrl: Uri
 )

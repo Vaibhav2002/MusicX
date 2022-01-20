@@ -6,7 +6,6 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth.assertThat
 import dev.vaibhav.musicx.util.TestDispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
@@ -26,7 +25,7 @@ class ExtensionsKtTest {
 
     @Test
     fun songsAreLoadedCorrectly() = runTest {
-        val musicList = context.getLocalMusicList(dispatcher).first()
+        val musicList = context.getLocalMusicList(dispatcher)
         println(musicList)
         assertThat(musicList).isNotEmpty()
     }

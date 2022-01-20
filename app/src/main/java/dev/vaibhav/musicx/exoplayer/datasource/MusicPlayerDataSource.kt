@@ -12,6 +12,7 @@ import com.google.android.exoplayer2.upstream.DefaultDataSource
 import dev.vaibhav.musicx.data.models.local.Music
 import dev.vaibhav.musicx.exoplayer.datasource.MusicPlayerDataSource.State.*
 import dev.vaibhav.musicx.utils.DURATION
+import timber.log.Timber
 
 abstract class MusicPlayerDataSource {
 
@@ -56,12 +57,12 @@ abstract class MusicPlayerDataSource {
                 MediaMetadataCompat.METADATA_KEY_DISPLAY_DESCRIPTION,
                 music.artists.joinToString(",")
             )
-            putString(MediaMetadataCompat.METADATA_KEY_MEDIA_URI, music.musicUrl)
+            putString(MediaMetadataCompat.METADATA_KEY_MEDIA_URI, music.musicUrl.toString())
         }.build()
 
     private fun getMediaItemFromMusic(music: Music) = MediaBrowserCompat.MediaItem(
         MediaDescriptionCompat.Builder().apply {
-            setMediaUri(music.musicUrl.toUri())
+            setMediaUri(music.musicUrl)
             setTitle(music.title)
             setSubtitle(music.artists.joinToString(","))
             setMediaId(music.id)
@@ -73,8 +74,9 @@ abstract class MusicPlayerDataSource {
 
     fun asMediaSource(dataSourceFactory: DefaultDataSource.Factory): MediaSource {
         val mediaSources = allMusic.map {
+            Timber.d(it.musicUrl.toString())
             ProgressiveMediaSource.Factory(dataSourceFactory)
-                .createMediaSource(it.musicUrl.toUri())
+                .createMediaSource(it.musicUrl)
         }
         return ConcatenatingMediaSource().apply { addMediaSources(mediaSources) }
     }
