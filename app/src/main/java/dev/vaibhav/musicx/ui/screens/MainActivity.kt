@@ -40,12 +40,9 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var dispatcher: Dispatcher
 
-//    lateinit var
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-//        val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions)
         setContent {
             ProvideWindowInsets {
                 MusicXTheme {
@@ -53,9 +50,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-
-    private fun askForStoragePermission() {
     }
 }
 

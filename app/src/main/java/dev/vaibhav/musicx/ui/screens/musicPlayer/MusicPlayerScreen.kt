@@ -35,6 +35,7 @@ import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 import dev.vaibhav.musicx.ui.theme.MusicXTheme
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @ExperimentalMaterialApi
 @ExperimentalAnimationApi
@@ -47,6 +48,7 @@ fun MusicPlayerScreen(
     val context = LocalContext.current
     val bottomColor = MaterialTheme.colorScheme.background
     val primaryColor = MaterialTheme.colorScheme.primary
+    val onPrimaryColor = MaterialTheme.colorScheme.onPrimary
     val tempDominantColor = remember { mutableStateOf(bottomColor) }
     val dominantColor = remember { Animatable(bottomColor) }
     val tempControlColor = remember { mutableStateOf(primaryColor) }
@@ -70,8 +72,9 @@ fun MusicPlayerScreen(
             isDarkMode = isDarkMode,
             viewModel = viewModel
         ) {
-            tempDominantColor.value = it.first
-            tempOnDominantColor.value = it.second
+            Timber.d(it.toString())
+            tempDominantColor.value = it?.first ?: primaryColor
+            tempOnDominantColor.value = it?.second ?: onPrimaryColor
         }
 
         setControlsColorFromImage(
@@ -264,10 +267,11 @@ private suspend fun setGradientColorFromImage(
     context: Context,
     isDarkMode: Boolean,
     viewModel: MusicPlayerViewModel,
-    onImageLoaded: (Pair<Color, Color>) -> Unit
+    onImageLoaded: (Pair<Color, Color>?) -> Unit
 ) {
     Coil.execute(ImageRequest.Builder(context).data(url).build()).drawable?.let {
-        viewModel.calcGradientColor(it, isDarkMode)?.let(onImageLoaded)
+//        Timber.d(viewModel.calcGradientColor(it, isDarkMode).toString())
+        viewModel.calcGradientColor(it, isDarkMode).let(onImageLoaded)
     }
 }
 

@@ -23,7 +23,6 @@ class MainViewModel @Inject constructor(
 
     init {
         subscribeToMusic()
-        downloadMusic()
     }
 
     private fun subscribeToMusic() = viewModelScope.launch {
@@ -41,8 +40,5 @@ class MainViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         musicUseCase.unsubscribeToService()
-    }
-
-    private fun downloadMusic() {
     }
 }

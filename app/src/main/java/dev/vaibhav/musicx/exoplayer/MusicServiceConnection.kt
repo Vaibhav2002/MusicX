@@ -46,11 +46,17 @@ class MusicServiceConnection @Inject constructor(@ApplicationContext private val
         get() = mediaController.transportControls
 
     fun subscribe(parentId: String, callbacks: MediaBrowserCompat.SubscriptionCallback) {
-        mediaBrowser.subscribe(parentId, callbacks)
+        if (!mediaBrowser.isConnected)
+            mediaBrowser.subscribe(parentId, callbacks)
     }
 
     fun unsubscribe(parentId: String) {
         mediaBrowser.unsubscribe(parentId)
+    }
+
+    fun reconnect() {
+        mediaBrowser.disconnect()
+        mediaBrowser.connect()
     }
 
     fun stopPlaying() = transportControls.stop()

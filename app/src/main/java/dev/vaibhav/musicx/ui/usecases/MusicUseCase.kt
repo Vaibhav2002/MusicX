@@ -53,6 +53,8 @@ class MusicUseCase @Inject constructor(private val musicConnection: MusicService
         musicConnection.unsubscribe(MEDIA_ROOT_ID)
     }
 
+    fun reconnect() = musicConnection.reconnect()
+
     fun skipToNextTrack() = musicConnection.skipToNextTrack()
 
     fun skipToPrevTrack() = musicConnection.skipToPrev()

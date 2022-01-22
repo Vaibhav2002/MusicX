@@ -21,15 +21,20 @@
         android:theme="@style/Theme.MusicX.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.screens.MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.MusicX.NoActionBar">
+            android:name=".ui.screens.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.screens.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MusicX.NoActionBar">
+
         </activity>
 
         <service
