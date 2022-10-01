@@ -99,9 +99,7 @@ fun HomeScreen(
 @Composable
 private fun FabWithBottomBar(viewModel: HomeViewModel, modifier: Modifier = Modifier) {
     Column(modifier = modifier, horizontalAlignment = Alignment.End) {
-//        AddMusicFab(modifier = Modifier.padding(end = 16.dp)) {
-//        }
-//        Spacer(modifier = Modifier.height(16.dp))
+
         val swipeToDismissState = rememberDismissState { dismissValue ->
             if (dismissValue == DismissValue.DismissedToEnd || dismissValue == DismissValue.DismissedToStart)
                 viewModel.onBottomBarDismissed()
@@ -213,12 +211,3 @@ private fun HomeScreenPreviewLight() {
         }
     }
 }
-//
-// @ExperimentalFoundationApi
-// @Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
-// @Composable
-// private fun HomeScreenPreviewDark() {
-//    MusicXTheme {
-//        HomeScreen {}
-//    }
-// }
