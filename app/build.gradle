@@ -7,12 +7,12 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
         applicationId "dev.vaibhav.musicx"
         minSdk 26
-        targetSdk 31
+        targetSdk 33
         versionCode 2
         versionName "1.0.2"
 
@@ -34,7 +34,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
-        useIR = true
+//        useIR = true
     }
     buildFeatures {
         compose true
@@ -52,15 +52,15 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.6.1'
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
-    implementation 'androidx.activity:activity-compose:1.4.0'
-    testImplementation 'junit:junit:4.+'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+    implementation 'androidx.activity:activity-compose:1.6.0'
+    testImplementation 'junit:junit:'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
@@ -68,7 +68,7 @@ dependencies {
     implementation "androidx.compose.material3:material3:$compose_m3_version"
 
     //navigation
-    implementation "androidx.navigation:navigation-compose:2.4.0-rc01"
+    implementation "androidx.navigation:navigation-compose:2.6.0-alpha02"
 
     //coil
     implementation "io.coil-kt:coil-compose:1.4.0"
@@ -90,12 +90,12 @@ dependencies {
     //firebase
     implementation platform('com.google.firebase:firebase-bom:29.0.3')
     implementation 'com.google.firebase:firebase-firestore-ktx'
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4"
 
     //hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
-    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0-rc01'
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
 
     //exoplayer
     implementation "com.google.android.exoplayer:exoplayer-core:$exoplayer_version"
@@ -117,7 +117,7 @@ dependencies {
     //unit testing
     kaptTest "com.google.dagger:hilt-android-compiler:$hilt_version"
     testImplementation "com.google.truth:truth:$google_truth_version"
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
     testImplementation "app.cash.turbine:turbine:$turbine_version"
 //    testImplementation "io.mockk:mockk:$mockK_version"
 //    testImplementation "io.mockk:mockk-agent-jvm:$mockK_version"
@@ -126,7 +126,7 @@ dependencies {
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
     androidTestImplementation "com.google.truth:truth:$google_truth_version"
     androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
-    androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0'
+    androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
     androidTestImplementation "app.cash.turbine:turbine:$turbine_version"
     androidTestImplementation "io.mockk:mockk-android:$mockK_version"
     androidTestImplementation "io.mockk:mockk-agent-android:$mockK_version"
